@@ -8,6 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,10 +24,10 @@ import jakarta.servlet.http.HttpSession;
 public class CandidateController {
 
     @Autowired
-    private ProfileCandidateService profileCandidateService;
+    private CandidateService candidateService;
 
     @Autowired
-    private CandidateService candidateService;
+    private ProfileCandidateService profileCandidateService;
 
     @GetMapping("/login")
     public String login() {
@@ -59,12 +60,13 @@ public class CandidateController {
 
     @GetMapping("/profile")
     @PreAuthorize("hasRole('CANDIDATE')")
-    public String profile(){
+    public String profile(Model model) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        var result = this.profileCandidateService.execute(authentication.getDetails().toString());
+        var user = this.profileCandidateService.execute(authentication.getDetails().toString());
+
+        model.addAttribute("user", user);
 
         return "candidate/profile";
     }
-
 }
