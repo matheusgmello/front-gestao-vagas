@@ -62,11 +62,15 @@ public class CandidateController {
     @PreAuthorize("hasRole('CANDIDATE')")
     public String profile(Model model) {
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        try{
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         var user = this.profileCandidateService.execute(authentication.getDetails().toString());
 
         model.addAttribute("user", user);
 
         return "candidate/profile";
+        }catch(HttpClientErrorException e){
+            return "redirect:/candidate/login";
+        }
     }
 }
