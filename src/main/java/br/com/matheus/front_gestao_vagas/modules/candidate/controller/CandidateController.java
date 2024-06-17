@@ -1,5 +1,7 @@
 package br.com.matheus.front_gestao_vagas.modules.candidate.controller;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,9 +14,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.matheus.front_gestao_vagas.modules.candidate.service.ApplyJobService;
 import br.com.matheus.front_gestao_vagas.modules.candidate.service.CandidateService;
 import br.com.matheus.front_gestao_vagas.modules.candidate.service.FindJobsService;
 import br.com.matheus.front_gestao_vagas.modules.candidate.service.ProfileCandidateService;
@@ -32,6 +36,9 @@ public class CandidateController {
 
     @Autowired
     private FindJobsService findJobsService;
+
+    @Autowired
+    private ApplyJobService applyJobService;
 
     @GetMapping("/login")
     public String login() {
@@ -87,12 +94,18 @@ public class CandidateController {
                 
                 var jobs = this.findJobsService.execute(getToken(), filter);
                 model.addAttribute("jobs", jobs);
-
             }
         }catch(HttpClientErrorException e){
             return "redirect:/candidate/login";
         }
         return "candidate/jobs";
+    }
+
+    @PostMapping("/jobs/apply")
+    @PreAuthorize("hasRole('CANDIDATE')")
+    public String applyJob(@RequestParam("jobId") UUID jobId) {
+        this.applyJobService.execute(getToken(), jobId);
+        return "redirect:/candidate/jobs";
     }
 
     private String getToken(){
