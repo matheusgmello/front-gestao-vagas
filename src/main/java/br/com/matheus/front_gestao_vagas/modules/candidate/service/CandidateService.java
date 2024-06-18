@@ -1,6 +1,5 @@
 package br.com.matheus.front_gestao_vagas.modules.candidate.service;
 
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,7 +14,7 @@ import br.com.matheus.front_gestao_vagas.modules.candidate.dto.Token;
 @Service
 public class CandidateService {
 
-    public Token login(String username, String password){
+    public Token login(String username, String password) {
         RestTemplate rt = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
@@ -25,7 +24,7 @@ public class CandidateService {
         data.put("username", username);
         data.put("password", password);
 
-        HttpEntity<Map<String,String>> request = new HttpEntity<>(data, headers);
+        HttpEntity<Map<String, String>> request = new HttpEntity<>(data, headers);
 
         var result = rt.postForObject("http://localhost:8080/candidate/auth", request, Token.class);
 

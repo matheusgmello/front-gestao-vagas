@@ -10,18 +10,17 @@ import br.com.matheus.front_gestao_vagas.modules.candidate.dto.CreateCandidateDT
 
 @Service
 public class CreateCandidateService {
-  
-  public void execute(CreateCandidateDTO createCandidateDTO) {
-    RestTemplate rt = new RestTemplate();
+    
+    public void execute(CreateCandidateDTO createCandidateDTO) {
+        
+            RestTemplate rt = new RestTemplate();
 
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
 
-    HttpHeaders headers = new HttpHeaders();
-    headers.setContentType(MediaType.APPLICATION_JSON);
+            HttpEntity<CreateCandidateDTO> request = new HttpEntity<>(createCandidateDTO ,headers);
 
-    HttpEntity<CreateCandidateDTO> request = new HttpEntity<>(createCandidateDTO, headers);
-
-    var result = rt.postForObject("http://localhost:8080/candidate", request, String.class);
-    System.out.println(result);
-  }
-
+            var result = rt.postForObject("http://localhost:8080/candidate/", request, String.class);
+            System.out.println(result);
+    }
 }

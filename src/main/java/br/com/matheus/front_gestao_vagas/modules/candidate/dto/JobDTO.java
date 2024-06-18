@@ -11,11 +11,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class JobDTO {
-  
-  private UUID id;
-  private String description;
-  private String benefits;
-  private String level;
-  private UUID companyID;
-  private Date createdAt;
+    private UUID id;
+    private String description;
+    private String benefits;
+    private String level;
+    private UUID companyId;
+    private Date createdAt;
 }

@@ -24,8 +24,8 @@ import br.com.matheus.front_gestao_vagas.modules.candidate.service.CandidateServ
 import br.com.matheus.front_gestao_vagas.modules.candidate.service.CreateCandidateService;
 import br.com.matheus.front_gestao_vagas.modules.candidate.service.FindJobsService;
 import br.com.matheus.front_gestao_vagas.modules.candidate.service.ProfileCandidateService;
+import br.com.matheus.front_gestao_vagas.utils.FormatErrorMessage;
 import jakarta.servlet.http.HttpSession;
-
 
 @Controller
 @RequestMapping("/candidate")
@@ -127,7 +127,7 @@ public class CandidateController {
             this.createCandidateService.execute(candidate);
             
         }catch(HttpClientErrorException ex){
-            model.addAttribute("error_message", ex.getMessage());
+            model.addAttribute("error_message", FormatErrorMessage.formatErrorMessage(ex.getResponseBodyAsString()));
         }    
 
         model.addAttribute("candidate", candidate);

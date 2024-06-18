@@ -1,6 +1,5 @@
 package br.com.matheus.front_gestao_vagas.modules.candidate.service;
 
-import java.lang.reflect.Parameter;
 import java.util.List;
 import java.util.Map;
 
@@ -19,26 +18,25 @@ import br.com.matheus.front_gestao_vagas.modules.candidate.dto.JobDTO;
 
 @Service
 public class FindJobsService {
-
-  public List<JobDTO> execute(String token, String filter){
-    RestTemplate rt = new RestTemplate();
+    
+    public List<JobDTO> execute(String token, String filter) {
+        RestTemplate rt = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(token);
 
         HttpEntity<Map<String, String>> request = new HttpEntity<>(headers);
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/candidate/job")
-                .queryParam("filter", filter);
-
+        .queryParam("filter", filter);
+        
         ParameterizedTypeReference<List<JobDTO>> responseType = new ParameterizedTypeReference<List<JobDTO>>() {};
-
+        
         try{
             var result = rt.exchange(builder.toUriString(), HttpMethod.GET, request, responseType);
+            System.out.println(result);
             return result.getBody();
-        }
-        catch(Unauthorized ex){
+        }catch(Unauthorized ex){
             throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED);
         }
-  }
-
+    }
 }

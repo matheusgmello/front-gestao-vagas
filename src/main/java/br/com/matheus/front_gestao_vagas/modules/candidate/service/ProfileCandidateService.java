@@ -8,10 +8,12 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.client.HttpClientErrorException.Unauthorized;
 
 import br.com.matheus.front_gestao_vagas.modules.candidate.dto.ProfileUserDTO;
+
+import org.springframework.web.client.RestTemplate;
+
 
 @Service
 public class ProfileCandidateService {
@@ -25,10 +27,9 @@ public class ProfileCandidateService {
 
         try{
             var result = rt.exchange("http://localhost:8080/candidate/", HttpMethod.GET, request, ProfileUserDTO.class);
-        System.out.println(result);
-        return result.getBody();
-        }
-        catch(Unauthorized ex){
+            System.out.println(result);
+            return result.getBody();
+        }catch(Unauthorized ex){
             throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED);
         }
     }
