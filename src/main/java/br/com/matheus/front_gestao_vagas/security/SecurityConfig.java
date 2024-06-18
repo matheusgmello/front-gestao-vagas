@@ -9,11 +9,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableMethodSecurity
 public class SecurityConfig {
-
+    
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests(auth -> {
             auth.requestMatchers("/candidate/login").permitAll()
+                 .requestMatchers("/candidate/create").permitAll()
                  .requestMatchers("/candidate/signIn").permitAll();
             auth.anyRequest().authenticated();
         })
