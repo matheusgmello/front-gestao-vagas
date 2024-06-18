@@ -21,9 +21,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.matheus.front_gestao_vagas.modules.candidate.dto.CreateCandidateDTO;
 import br.com.matheus.front_gestao_vagas.modules.candidate.service.ApplyJobService;
 import br.com.matheus.front_gestao_vagas.modules.candidate.service.CandidateService;
+import br.com.matheus.front_gestao_vagas.modules.candidate.service.CreateCandidateService;
 import br.com.matheus.front_gestao_vagas.modules.candidate.service.FindJobsService;
 import br.com.matheus.front_gestao_vagas.modules.candidate.service.ProfileCandidateService;
 import jakarta.servlet.http.HttpSession;
+
 
 @Controller
 @RequestMapping("/candidate")
@@ -40,6 +42,9 @@ public class CandidateController {
 
     @Autowired
     private ApplyJobService applyJobService;
+
+    @Autowired
+    private CreateCandidateService createCandidateService;
 
     @GetMapping("/login")
     public String login() {
@@ -117,7 +122,14 @@ public class CandidateController {
 
     @PostMapping("/create")
     public String save(CreateCandidateDTO candidate, Model model){
-        System.out.println(candidate.getName());
+
+        try{
+            this.createCandidateService.execute(candidate);
+            
+        }catch(HttpClientErrorException ex){
+            model.addAttribute("error_message", ex.getMessage());
+        }    
+
         model.addAttribute("candidate", candidate);
         return "candidate/create";
     }
