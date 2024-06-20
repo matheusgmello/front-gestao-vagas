@@ -8,23 +8,37 @@
         <title>Cadastro de Company</title>
     </head>
 
-    <body class="bg-sky-950 h-screen items-center flex justify-center">
+    <body class="bg-sky-900 h-screen items-center flex justify-center">
         <form id="submitForm" action="" class="flex gap-24" th:action="@{/company/create}" method="post" th:object="${company}">
             
             <div class="space-y-8 bg-zinc-950 rounded-md p-10">
                 <h2 class="text-white">Empresa, crie o seu cadastro gratuitamente</h2>
-                <input type="text" name="username" th:field="*{username}" class="bg-gray-50 text-gray-900 text-xd rounded w-96 block p-3 focus:outline-none focus:ring-green-600 focus:ring-2" placeholder="Digite o seu usuário">
-                <input type="text" name="name" th:field="*{name}" class="bg-gray-50 text-gray-900 text-xd rounded w-96 block p-3 focus:outline-none focus:ring-green-600 focus:ring-2" placeholder="Digite o seu nome">
-                <input type="email" name="email" th:field="*{email}" class="bg-gray-50 text-gray-900 text-xd rounded w-96 block p-3 focus:outline-none focus:ring-green-600 focus:ring-2" placeholder="E-mail">
-                <input type="text" name="website" th:field="*{website}" class="bg-gray-50 text-gray-900 text-xd rounded w-96 block p-3 focus:outline-none focus:ring-green-600 focus:ring-2" placeholder="Website">
-                <input type="password" id="password" th:field="*{password}" name="password" class="bg-gray-50 text-gray-900 text-xd rounded w-96 block p-3 focus:outline-none focus:ring-green-600 focus:ring-2" placeholder="Senha">
-                <input type="password" id="confirmPassword" name="confirmPassword" class="bg-gray-50 text-gray-900 text-xd rounded w-96 block p-3 focus:outline-none focus:ring-green-600 focus:ring-2" placeholder="Confirme sua senha">
+               
+                <div class="flex flex-row gap-10">
+                    <input type="text" name="username" th:field="*{username}" class="bg-gray-50 text-gray-900 text-xd rounded w-96 block p-3 focus:outline-none focus:ring-green-600 focus:ring-2" placeholder="Digite o seu usuário">
+                    <input type="text" name="name" th:field="*{name}" class="bg-gray-50 text-gray-900 text-xd rounded w-96 block p-3 focus:outline-none focus:ring-green-600 focus:ring-2" placeholder="Digite o seu nome">
+                </div>
+
+                <div class="flex flex-row gap-10">
+                    <input type="email" name="email" th:field="*{email}" class="bg-gray-50 text-gray-900 text-xd rounded w-96 block p-3 focus:outline-none focus:ring-green-600 focus:ring-2" placeholder="E-mail">
+                    <input type="text" name="website" th:field="*{website}" class="bg-gray-50 text-gray-900 text-xd rounded w-96 block p-3 focus:outline-none focus:ring-green-600 focus:ring-2" placeholder="Website">
+                </div>
+                
+                <div class="flex flex-row gap-10">
+                    <input type="password" id="password" th:field="*{password}" name="password" class="bg-gray-50 text-gray-900 text-xd rounded w-96 block p-3 focus:outline-none focus:ring-green-600 focus:ring-2" placeholder="Senha">
+                    <input type="password" id="confirmPassword" name="confirmPassword" class="bg-gray-50 text-gray-900 text-xd rounded w-96 block p-3 focus:outline-none focus:ring-green-600 focus:ring-2" placeholder="Confirme sua senha">
+                </div>
+
                 <textarea name="description" th:field="*{description}" placeholder="Digite uma breve descrição sobre você" class="bg-gray-50 text-gray-900 text-xd rounded w-96 block p-3 focus:outline-none focus:ring-green-600 focus:ring-2"></textarea>
                 
                 <p class="text-red-400" th:if="${error_message}" th:text="${error_message}" ></p>
                 <p class="text-red-400 hidden" id="password_error">As senhas não conferem</p>
-                <button class="bg-green-900 w-96 p-4 rounded text-white hover:bg-green-700">Cadastre-se</button>
-                <a href="/company/login" class="block text-center text-green-700 underline underline-offset-2 hover:text-green-600">Login</a>
+                <button class="bg-green-700 w-full p-4 rounded text-white hover:bg-green-600">Cadastre-se</button>
+                <p class="mt-4 text-white">
+                    Já tem uma conta? <a href="/company/login" class="text-center text-green-700  hover:text-green-600">Faça login aqui</a>
+                </p>
+               
+
             </div>
             <div class="text-white max-w-80 text-6xl flex items-center">
                 Gestão de Vagas

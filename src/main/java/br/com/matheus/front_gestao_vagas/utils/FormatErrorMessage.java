@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class FormatErrorMessage {
-
+    
     public static String formatErrorMessage(String message){
         ObjectMapper objectMapper = new ObjectMapper();
 
