@@ -17,7 +17,7 @@
                 <a href="/company/jobs/list" class="text-white text-lg font-semibold">Listagem</a>
             </div>
             <div>
-                <a href="/company/jobs/logout" class="text-white text-lg font-semibold">Logout</a>
+                <a href="/company/logout" class="text-white text-lg font-semibold">Logout</a>
             </div>
         </nav>
 
@@ -34,11 +34,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="border px-4 py-2">1</td>
-                            <td class="border px-4 py-2">Description</td>
-                            <td class="border px-4 py-2">Benefícios</td>
-                            <td class="border px-4 py-2">Level</td>
+                        <tr th:each="job: ${jobs}">
+                            <td class="border px-4 py-2" th:text="${job.id}" ></td>
+                            <td class="border px-4 py-2" th:text="${job.description}"></td>
+                            <td class="border px-4 py-2" th:text="${job.benefits}"></td>
+                            <td class="border px-4 py-2" th:text="${job.level}"></td>
 
                         </tr>
                     </tbody>

@@ -100,7 +100,7 @@ public class CompanyController {
     @PreAuthorize("hasRole('COMPANY')")
     public String createJobs(CreateJobsDTO jobs){
         var result = this.createJobService.execute(jobs, getToken());
-        return "redirect:/company/jobs";
+        return "redirect:/company/jobs/list";
     }
 
     @GetMapping("/jobs/list")
@@ -110,6 +110,17 @@ public class CompanyController {
         model.addAttribute("jobs", result);
         System.out.println(result);
         return "company/list";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+
+        SecurityContextHolder.getContext().setAuthentication(null);
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
+        session.setAttribute("token", null);
+
+        return "redirect:/company/login";
     }
 
     private String getToken(){

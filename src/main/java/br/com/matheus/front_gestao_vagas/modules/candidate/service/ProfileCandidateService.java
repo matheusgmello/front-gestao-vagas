@@ -13,6 +13,7 @@ import org.springframework.web.client.HttpClientErrorException.Unauthorized;
 import br.com.matheus.front_gestao_vagas.modules.candidate.dto.ProfileUserDTO;
 
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.RestTemplate;
 
 
 @Service
