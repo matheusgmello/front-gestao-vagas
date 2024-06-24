@@ -2,6 +2,7 @@ package br.com.matheus.front_gestao_vagas.modules.company.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -13,6 +14,9 @@ import br.com.matheus.front_gestao_vagas.modules.candidate.dto.JobDTO;
 
 @Service
 public class ListAllJobsCompanyService {
+
+    @Value("${host.api.gestao.vagas}")
+    private String hostAPIGestaoVagas;
     
     public List<JobDTO> execute(String token){
         RestTemplate rt = new RestTemplate();
@@ -24,7 +28,9 @@ public class ListAllJobsCompanyService {
         ParameterizedTypeReference<List<JobDTO>> responseType = new ParameterizedTypeReference<List<JobDTO>>(){
         };
 
-        var result = rt.exchange("http://localhost:8080/company/job/", HttpMethod.GET, httpEntity, responseType);
+        var url = hostAPIGestaoVagas.concat("/company/job/");
+
+        var result = rt.exchange(url, HttpMethod.GET, httpEntity, responseType);
         return result.getBody();
     }
 }
