@@ -5,6 +5,17 @@
 
 Interface completa do projeto de sistema de controle de empresas, vagas e aplicações. A interface foi construída utilizando Thymeleaf junto com o ecossistema Spring Boot. O sistema permite que o usuário crie seu cadastro para aplicar em vagas e que as empresas cadastrem novas vagas para realizar contratações.
 
+
+<div>
+  <table>
+  <tr>
+    <td><img src="img/cover.png" alt="Home page do projeto" width="570" height="350" ></td>
+    <td><img src="img/search.png" alt="Home page do projeto" width="570" height="350" ></td>
+  </table>
+  </tr>
+</div>
+
+
 ## Tabela de Conteúdos
 
 - [Requisitos](#requisitos)
