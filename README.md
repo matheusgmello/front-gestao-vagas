@@ -9,8 +9,8 @@ Interface completa do projeto de sistema de controle de empresas, vagas e aplica
 <div>
   <table>
   <tr>
-    <td><img src="img/cover.png" alt="Home page do projeto" width="570" height="350" ></td>
-    <td><img src="img/search.png" alt="Home page do projeto" width="570" height="350" ></td>
+    <td><img src="img/cover.png" alt="Home page do projeto" width="500" height="300" ></td>
+    <td><img src="img/search.png" alt="Home page do projeto" width="500" height="300" ></td>
   </table>
   </tr>
 </div>
